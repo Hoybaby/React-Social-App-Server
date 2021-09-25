@@ -1,4 +1,4 @@
-const { ApolloServer} = require('apollo-server');
+const { ApolloServer, PubSub} = require('apollo-server');
 
 // Database connection
 const mongoose = require('mongoose');
@@ -6,6 +6,9 @@ const mongoose = require('mongoose');
 // typedDefs needed for GraphQL and Resolvers for the trypedDefs
 const typeDefs = require('./graphql/typedDefs')
 const resolvers = require('./graphql/resolvers');
+
+
+const pubsub = new PubSub();
 
 // connection to database
 const {MONGODB} = require('./config.js')
@@ -19,7 +22,7 @@ const server = new ApolloServer({
     typeDefs,
     resolvers,
     // the third arguement is the apollo 
-    context: ({req}) => ({req}),
+    context: ({req}) => ({req, pubsub}),
     
 
 
