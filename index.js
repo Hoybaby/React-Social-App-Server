@@ -18,7 +18,7 @@ const server = new ApolloServer({
  const db_password = process.env.DB_PASSWORD
 
 mongoose
-    .connect(`mongodb+srv://hoybaby:Welcome0@firstcluster.b4kva.mongodb.net/Mern?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true })
+    .connect(MONGODB, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log('MongoDB Connected');
         return server.listen({ port: PORT });
