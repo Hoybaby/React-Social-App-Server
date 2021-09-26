@@ -3,9 +3,11 @@ const mongoose = require('mongoose');
 
 const typeDefs = require('./graphql/typedDefs')
 const resolvers = require('./graphql/resolvers');
-const { MONGODB } = require('./config.js');
+// const { MONGODB } = require('./config.js');
 
-const dotenv = require('dotenv').config
+require('dotenv').config();
+
+
 
 console.log()
 
@@ -24,7 +26,7 @@ const server = new ApolloServer({
 
 
 mongoose
-    .connect('mongodb+srv://hoybaby:Welcome0@firstcluster.b4kva.mongodb.net/Mern?retryWrites=true&w=major', { useNewUrlParser: true, useUnifiedTopology: true })
+    .connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log('MongoDB Connected');
         return server.listen({ port: PORT });
