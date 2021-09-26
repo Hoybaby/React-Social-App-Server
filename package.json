@@ -1,5 +1,5 @@
 {
-  "name": "React-Social-App",
+  "name": "react-social-app-backend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -30,8 +30,8 @@
     "nodemon": "^2.0.12"
   },
   "scripts": {
-    "serve": "node index",
-    "start": "node index",
+    "seed": "node seeds",
+    "start": "node",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
