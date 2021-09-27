@@ -2,7 +2,7 @@ const { AuthenticationError } = require('apollo-server');
 
 const jwt = require('jsonwebtoken');
 // this secret will varify the token because we used it like this
-const {SECRET_KEY} = require('../config')
+// const {SECRET_KEY} = require('../config')
 
 module.exports = (context) => {
     // context
@@ -13,7 +13,7 @@ module.exports = (context) => {
         // if this fails, the token isnt valid
         if(token) {
             try {
-                const user = jwt.verify(token, SECRET_KEY);
+                const user = jwt.verify(token, process.env.SECRET_KEY);
                 return user
             } catch(err) {
                 throw new AuthenticationError('Invalid/Expired token')

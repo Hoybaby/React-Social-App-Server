@@ -1,14 +1,18 @@
 const mongoose = require("mongoose");
 const faker = require("faker");
+const bcrypt = require("bcryptjs");
 const Post = require("../models/Post");
 const User = require("../models/User");
 
 require("dotenv").config();
 
 const createFakeUser = () => {
+  const username = faker.internet.userName();
+  const password = faker.internet.password();
+  console.log({ username, password });
   return {
-    username: faker.internet.userName(),
-    password: faker.internet.password(),
+    username,
+    password: bcrypt.hashSync(password, 12),
     email: faker.internet.email(),
   };
 };
@@ -42,8 +46,8 @@ const createFakePost = (userId) => {
 
     // Seed posts
     const posts = new Array(20).fill(0).map(() => createFakePost(userId()));
-    const createdPosts = await Post.insertMany(posts);
-    console.log("Posts seeded")
+    await Post.insertMany(posts);
+    console.log("Posts seeded");
 
     process.exit(0);
   } catch (err) {
